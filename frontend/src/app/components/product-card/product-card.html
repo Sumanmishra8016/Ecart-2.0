@@ -1,0 +1,9 @@
+<div class="card">
+  <img [src]="product.image_url" [alt]="product.name" />
+  <h3>{{ product.name }}</h3>
+  <p>{{ product.description }}</p>
+  <div class="footer">
+    <span class="price">{{ formattedPrice }}</span>
+    <button (click)="onAddToCart()">Add to Cart</button>
+  </div>
+</div>

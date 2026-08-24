@@ -1,0 +1,14 @@
+<div class="cart-container">
+  <h2>Shopping Cart</h2>
+  <div *ngIf="items.length === 0" class="empty">Cart is empty.</div>
+  
+  <div class="cart-item" *ngFor="let item of items">
+    <span>{{ item.name }} (x{{ item.quantity }})</span>
+    <span>${{ (item.price * item.quantity).toFixed(2) }}</span>
+    <button (click)="removeItem(item.cart_id)">Remove</button>
+  </div>
+
+  <div class="cart-total" *ngIf="items.length > 0">
+    <strong>Total: ${{ totalPrice.toFixed(2) }}</strong>
+  </div>
+</div>
