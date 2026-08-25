@@ -3,7 +3,8 @@ export interface Product {
   name: string;
   price: number;
   description: string;
-  image_url: string;
+  image: string;
+  qty?: number; // Optional property to track quantity in the cart
 }
 
 export interface CartItem {
@@ -11,6 +12,6 @@ export interface CartItem {
   product_id: number;
   name: string;
   price: number;
-  image_url: string;
+  image: string;
   quantity: number;
 }

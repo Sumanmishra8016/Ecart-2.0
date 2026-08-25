@@ -1,1 +1,84 @@
 /* You can add global styles to this file, and also import other style files */
+/* ---------------------------------------------------
+   Design tokens
+   Palette idea: a deep "midnight ledger" navy for structure,
+   a warm coral for action (Add to Cart, totals), and a clean
+   off-white canvas so product photos stay the focus.
+--------------------------------------------------- */
+:root {
+  --color-navy-900: #131b2e;
+  --color-navy-700: #1f2b45;
+  --color-navy-500: #2c3b5c;
+
+  --color-coral-500: #ff6b4a;
+  --color-coral-600: #e85a3b;
+
+  --color-success-500: #2f9e68;
+
+  --color-bg: #f5f6f9;
+  --color-surface: #ffffff;
+  --color-border: #e4e7ee;
+
+  --color-text-primary: #1c2333;
+  --color-text-secondary: #6b7280;
+  --color-text-on-dark: #f5f6f9;
+
+  --font-display: 'Sora', 'Segoe UI', sans-serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --shadow-card: 0 1px 2px rgba(19, 27, 46, 0.06), 0 8px 24px rgba(19, 27, 46, 0.06);
+  --shadow-card-hover: 0 4px 10px rgba(19, 27, 46, 0.08), 0 16px 32px rgba(19, 27, 46, 0.1);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-coral-500);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

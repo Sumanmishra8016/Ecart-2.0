@@ -1,35 +1,60 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Product, CartItem } from '../models/product.model';
+import { Injectable, signal, computed } from '@angular/core';
+import { Product } from '../models/product.model';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class CartService {
-  private baseUrl = 'http://localhost:5000/api';
-  private cartSubject = new BehaviorSubject<CartItem[]>([]);
-  public cart$ = this.cartSubject.asObservable();
+  // signal keeps every component that reads it in sync automatically
+  private cartItems = signal<Product[]>([]);
 
-  constructor(private http: HttpClient) {}
+  readonly items = this.cartItems.asReadonly();
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUrl}/products`);
+  readonly totalCount = computed(() =>
+    this.cartItems().reduce((sum, item) => sum + (item.qty ?? 1), 0)
+  );
+
+  readonly totalPrice = computed(() =>
+    this.cartItems().reduce((sum, item) => sum + item.price * (item.qty ?? 1), 0)
+  );
+
+  addToCart(product: Product): void {
+    const existing = this.cartItems().find(item => item.id === product.id);
+
+    if (existing) {
+      this.cartItems.update(items =>
+        items.map(item =>
+          item.id === product.id ? { ...item, qty: (item.qty ?? 1) + 1 } : item
+        )
+      );
+    } else {
+      this.cartItems.update(items => [...items, { ...product, qty: 1 }]);
+    }
   }
 
-  fetchCart(): void {
-    this.http.get<CartItem[]>(`${this.baseUrl}/cart`).subscribe((items) => {
-      this.cartSubject.next(items);
-    });
+  increment(productId: number): void {
+    this.cartItems.update(items =>
+      items.map(item =>
+        item.id === productId ? { ...item, qty: (item.qty ?? 1) + 1 } : item
+      )
+    );
   }
 
-  addToCart(productId: number): void {
-    this.http.post(`${this.baseUrl}/cart`, { productId }).subscribe(() => {
-      this.fetchCart();
-    });
+  decrement(productId: number): void {
+    this.cartItems.update(items =>
+      items
+        .map(item =>
+          item.id === productId ? { ...item, qty: (item.qty ?? 1) - 1 } : item
+        )
+        .filter(item => (item.qty ?? 0) > 0)
+    );
   }
 
-  removeFromCart(cartId: number): void {
-    this.http.delete(`${this.baseUrl}/cart/${cartId}`).subscribe(() => {
-      this.fetchCart();
-    });
+  removeFromCart(productId: number): void {
+    this.cartItems.update(items => items.filter(item => item.id !== productId));
+  }
+
+  clearCart(): void {
+    this.cartItems.set([]);
   }
 }

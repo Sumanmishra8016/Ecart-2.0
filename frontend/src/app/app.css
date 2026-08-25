@@ -92,3 +92,18 @@ button:hover {
     color: #888; 
     font-style: italic; 
 }
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-4);
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
+}

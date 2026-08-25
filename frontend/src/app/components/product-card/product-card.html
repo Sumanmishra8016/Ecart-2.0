@@ -1,9 +1,21 @@
-<div class="card">
-  <img [src]="product.image_url" [alt]="product.name" />
-  <h3>{{ product.name }}</h3>
-  <p>{{ product.description }}</p>
-  <div class="footer">
-    <span class="price">{{ formattedPrice }}</span>
-    <button (click)="onAddToCart()">Add to Cart</button>
+<article class="product-card">
+  <div class="product-card__image-wrap">
+    <img [src]="product.image" [alt]="product.name" class="product-card__image" />
   </div>
-</div>
+
+  <div class="product-card__body">
+    <h3 class="product-card__name">{{ product.name }}</h3>
+    <p class="product-card__desc">{{ product.description }}</p>
+
+    <div class="product-card__footer">
+      <span class="product-card__price">{{ product.price | currency : 'INR' }}</span>
+      <button
+        type="button"
+        class="btn-add"
+        [class.btn-add--done]="justAdded"
+        (click)="onAddToCart()">
+        {{ justAdded ? 'Added ✓' : 'Add to Cart' }}
+      </button>
+    </div>
+  </div>
+</article>

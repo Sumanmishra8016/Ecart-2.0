@@ -12,7 +12,7 @@ CREATE TABLE cart_items (
     quantity INT NOT NULL DEFAULT 1
 );
 
-INSERT INTO products (name, price, description, image_url) VALUES
+INSERT INTO products (name, price, description, image) VALUES
 ('Wireless Headphones', 99.99, 'Noise-canceling over-ear headphones', '/DSC06348.JPG'),
 ('Smart Watch', 199.49, 'Fitness tracking smartwatch', 'http://localhost:5000/DSC06344.JPG'),
 ('Mechanical Keyboard', 85.00, 'RGB tactile mechanical keyboard', 'http://localhost:5000/DSC06344.JPG'),

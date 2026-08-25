@@ -1,7 +1,10 @@
-<div class="product-grid">
-  <app-product-card 
-    *ngFor="let prod of products" 
-    [product]="prod" 
-    (add)="onAdd($event)">
-  </app-product-card>
-</div>
+<section class="product-list">
+  <h2 class="product-list__title">All Products</h2>
+
+  <div class="product-list__grid">
+    <app-product-card
+      *ngFor="let product of products"
+      [product]="product">
+    </app-product-card>
+  </div>
+</section>

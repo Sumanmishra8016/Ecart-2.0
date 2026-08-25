@@ -1,0 +1,28 @@
+<header class="site-header">
+  <div class="site-header__inner">
+    <div class="brand">
+      <span class="brand__mark">E</span>
+      <span class="brand__name">Cart App</span>
+    </div>
+
+    <nav class="site-header__nav">
+      <a href="#" class="nav-link">Shop</a>
+      <a href="#" class="nav-link">Deals</a>
+      <a href="#" class="nav-link">About</a>
+    </nav>
+
+    <button class="cart-pill" type="button" aria-label="View cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L21 8H6"
+              stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="9.5" cy="20.5" r="1.4" fill="currentColor"/>
+        <circle cx="17.5" cy="20.5" r="1.4" fill="currentColor"/>
+      </svg>
+      <span>Cart</span>
+      @if (cartCount() > 0){
+        <span class="cart-pill__badge" > {{ cartCount() }}</span>
+      }
+    </button>
+  </div>
+</header>
+
